@@ -18,7 +18,9 @@ public class TrieFactory {
       BufferedReader reader = new BufferedReader(new FileReader(getClass().getResource(String.format("dictionaries/%s", dictionary)).getFile()));
       String word;
       while ((word = reader.readLine()) != null) {
-        trie.addWord(word.trim());
+        if (word.length() > 0) {
+          trie.addWord(word.trim());
+        }
       }
       Generator.Instance.setRoot(trie.getRoot());
       Generator.Instance.setRackCapacity(RACK_CAPACITY);
