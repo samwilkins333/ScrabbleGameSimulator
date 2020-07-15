@@ -13,7 +13,7 @@ public class TrieFactory {
   public Trie loadFrom(String dictionary) {
     Trie trie = new Trie();
     try {
-      BufferedReader reader = new BufferedReader(new FileReader(getClass().getResource(dictionary).getFile()));
+      BufferedReader reader = new BufferedReader(new FileReader(getClass().getResource(String.format("dictionaries/%s", dictionary)).getFile()));
       String word;
       while ((word = reader.readLine()) != null) {
         trie.addWord(word.trim());
