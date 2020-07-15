@@ -1,14 +1,11 @@
 package resources;
 
-import ScrabbleBase.Generation.Generator;
 import ScrabbleBase.Vocabulary.Trie;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-
-import static main.Configuration.RACK_CAPACITY;
 
 public class TrieFactory {
 
@@ -22,8 +19,6 @@ public class TrieFactory {
           trie.addWord(word.trim());
         }
       }
-      Generator.Instance.setRoot(trie.getRoot());
-      Generator.Instance.setRackCapacity(RACK_CAPACITY);
       return trie;
     } catch (FileNotFoundException e) {
       System.out.printf("Unable to locate dictionary file \"%s\"\n", dictionary);

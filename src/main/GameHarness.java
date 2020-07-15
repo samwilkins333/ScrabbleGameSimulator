@@ -1,12 +1,12 @@
 package main;
 
+import ScrabbleBase.Generation.Generator;
 import ScrabbleBase.Vocabulary.Trie;
 import resources.TrieFactory;
 
 import java.util.*;
 
-import static main.Configuration.ENABLE_LOGGING;
-import static main.Configuration.GAME_ITERATIONS;
+import static main.Configuration.*;
 
 public class GameHarness {
 
@@ -16,6 +16,9 @@ public class GameHarness {
     System.out.printf("Vocabulary contains %d words.\n", trie.getWordCount());
     System.out.printf("Trie contains %d nodes.\n", trie.getNodeCount());
     System.out.println("Done.\n");
+
+    Generator.Instance.setRoot(trie.getRoot());
+    Generator.Instance.setRackCapacity(RACK_CAPACITY);
 
     System.out.println("Beginning game simulation...\n");
 
