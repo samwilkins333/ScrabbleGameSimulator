@@ -6,6 +6,7 @@ import resources.TrieFactory;
 import java.util.*;
 
 import static main.Configuration.ENABLE_LOGGING;
+import static main.Configuration.GAME_ITERATIONS;
 
 public class GameHarness {
 
@@ -20,7 +21,7 @@ public class GameHarness {
 
     long start = System.currentTimeMillis();
     List<GameResult> results = new ArrayList<>();
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < GAME_ITERATIONS; i++) {
       System.out.printf("Game %d\n", i + 1);
       results.add(new Game().play(ENABLE_LOGGING));
     }
