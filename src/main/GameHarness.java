@@ -28,13 +28,13 @@ public class GameHarness {
 
     long start = System.currentTimeMillis();
     List<GameResult> results = new ArrayList<>();
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 0; i < 10; i++) {
       System.out.printf("Game %d\n", i + 1);
       results.add(new Game().play(false));
     }
 
     long duration = System.currentTimeMillis() - start;
-    System.out.printf("\nAll games completed in (wall clock) %d seconds. Computing statistics...\n", duration / 1000);
+    System.out.printf("\nAll games completed in (wall clock) %d seconds. Computing statistics...\n\n", duration / 1000);
 
     Optional<GameResult> maxWord = results.stream().max(Comparator.comparingInt(result -> result.getBestWord().getScore()));
     maxWord.ifPresent(gameResult -> System.out.printf("Highest-scoring single play was %s.\n", gameResult.getBestWord()));
