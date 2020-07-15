@@ -24,13 +24,17 @@ public class GameHarness {
     System.out.printf("Trie contains %d nodes.\n", trie.getNodeCount());
     System.out.println("Done.\n");
 
+    System.out.println("Beginning game simulation...\n");
+
+    long start = System.currentTimeMillis();
     List<GameResult> results = new ArrayList<>();
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 1000; i++) {
       System.out.printf("Game %d\n", i + 1);
       results.add(new Game().play(false));
     }
 
-    System.out.println("\nAll games completed. Computing statistics...\n");
+    long duration = System.currentTimeMillis() - start;
+    System.out.printf("\nAll games completed in (wall clock) %d seconds. Computing statistics...\n", duration / 1000);
 
     Optional<GameResult> maxWord = results.stream().max(Comparator.comparingInt(result -> result.getBestWord().getScore()));
     maxWord.ifPresent(gameResult -> System.out.printf("Highest-scoring single play was %s.\n", gameResult.getBestWord()));
