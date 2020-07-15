@@ -18,7 +18,7 @@ public class Game {
 
   public GameResult play(boolean enableLogging) {
     if (enableLogging) {
-      System.out.println("Populating tile bag...");
+      System.out.println("\nPopulating tile bag...");
     }
     List<Tile> tileBag = new ArrayList<>();
     for (Map.Entry<Character, Configuration.TileConfiguration> entry : Configuration.tileConfigurationMap.entrySet()) {
@@ -96,18 +96,21 @@ public class Game {
         }
       }
       if (enableLogging) {
-        log(board, playerOne.getScore(), playerTwo.getScore(), tileBag.size());
+        logBoard(board);
+        System.out.printf("\nTile bag count: %d\n\n", tileBag.size());
+        System.out.printf("Player 1: %d\n", playerOne.getScore());
+        System.out.printf("Player 2: %d\n", playerTwo.getScore());
       }
     }
 
     if (enableLogging) {
-      System.out.println("\nGame over.");
+      System.out.println("\nGame over.\n");
     }
 
-    return new GameResult(bestWord, playerOne.getScore(), playerTwo.getScore(), i);
+    return new GameResult(board, bestWord, playerOne.getScore(), playerTwo.getScore(), i);
   }
 
-  private static void log(BoardStateUnit[][] board, int oneScore, int twoScore, int remainingTileCount) {
+  public static void logBoard(BoardStateUnit[][] board) {
     for (int y = 0; y < BOARD_DIMENSIONS; y++) {
       List<String> letters = new ArrayList<>();
       for (int x = 0; x < BOARD_DIMENSIONS; x++) {
@@ -116,9 +119,6 @@ public class Game {
       }
       System.out.println(String.join(" ", letters));
     }
-    System.out.printf("\nTile bag count: %d\n\n", remainingTileCount);
-    System.out.printf("Player 1: %d\n", oneScore);
-    System.out.printf("Player 2: %d\n", twoScore);
   }
 
 }

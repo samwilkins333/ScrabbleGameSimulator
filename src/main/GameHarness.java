@@ -1,19 +1,11 @@
 package main;
 
-import ScrabbleBase.Board.Location.TilePlacement;
-import ScrabbleBase.Board.State.BoardStateUnit;
-import ScrabbleBase.Board.State.Multiplier;
-import ScrabbleBase.Board.State.Tile;
-import ScrabbleBase.Generation.Generator;
-import ScrabbleBase.Generation.Objects.ScoredCandidate;
 import ScrabbleBase.Vocabulary.Trie;
 import resources.TrieFactory;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
-import static main.Configuration.BOARD_DIMENSIONS;
-import static main.Configuration.RACK_CAPACITY;
+import static main.Configuration.ENABLE_LOGGING;
 
 public class GameHarness {
 
@@ -30,23 +22,35 @@ public class GameHarness {
     List<GameResult> results = new ArrayList<>();
     for (int i = 0; i < 10; i++) {
       System.out.printf("Game %d\n", i + 1);
-      results.add(new Game().play(false));
+      results.add(new Game().play(ENABLE_LOGGING));
     }
 
     long duration = System.currentTimeMillis() - start;
-    System.out.printf("\nAll games completed in (wall clock) %d seconds. Computing statistics...\n\n", duration / 1000);
+    if (!ENABLE_LOGGING) {
+      System.out.println();
+    }
+    System.out.printf("All games completed in (wall clock) %d seconds. Computing statistics...\n", duration / 1000);
 
     Optional<GameResult> maxWord = results.stream().max(Comparator.comparingInt(result -> result.getBestWord().getScore()));
-    maxWord.ifPresent(gameResult -> System.out.printf("Highest-scoring single play was %s.\n", gameResult.getBestWord()));
+    maxWord.ifPresent(gameResult -> {
+      System.out.printf("\n1) Highest-scoring single play was %s.\n\n", gameResult.getBestWord());
+      Game.logBoard(gameResult.getBoard());
+    });
 
     Optional<GameResult> maxOne = results.stream().max(Comparator.comparingInt(GameResult::getOneScore));
     Optional<GameResult> maxTwo = results.stream().max(Comparator.comparingInt(GameResult::getTwoScore));
     if (maxOne.isPresent() && maxTwo.isPresent()) {
-      System.out.printf("Highest-scoring player total was %d points.\n", Math.max(maxOne.get().getOneScore(), maxTwo.get().getTwoScore()));
+      int maxScore = Math.max(maxOne.get().getOneScore(), maxTwo.get().getTwoScore());
+      GameResult maxGame = maxScore == maxOne.get().getOneScore() ? maxOne.get() : maxTwo.get();
+      System.out.printf("\n2) Highest-scoring player total was %d points.\n\n", maxScore);
+      Game.logBoard(maxGame.getBoard());
     }
 
     Optional<GameResult> maxLength = results.stream().max(Comparator.comparingInt(GameResult::getMoveCount));
-    maxLength.ifPresent(gameResult -> System.out.printf("Longest game required %d turns.\n", gameResult.getMoveCount()));
+    maxLength.ifPresent(gameResult -> {
+      System.out.printf("\n3) Longest game required %d turns.\n\n", gameResult.getMoveCount());
+      Game.logBoard(gameResult.getBoard());
+    });
   }
 
 }

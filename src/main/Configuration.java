@@ -11,6 +11,7 @@ public final class Configuration {
 
   public static final int RACK_CAPACITY = 7;
   public static final int BOARD_DIMENSIONS = 15;
+  public static final boolean ENABLE_LOGGING = false;
 
   public static final Map<Character, TileConfiguration> tileConfigurationMap = new HashMap<>();
   static {
