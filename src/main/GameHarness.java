@@ -12,7 +12,7 @@ public class GameHarness {
 
   public static void main(String[] args) {
     System.out.println("\nLoading trie...");
-    Trie trie = new TrieFactory().loadFrom("ospd4.txt");
+    Trie trie = new TrieFactory().loadFrom(DICTIONARY);
     System.out.printf("Vocabulary contains %d words.\n", trie.getWordCount());
     System.out.printf("Trie contains %d nodes.\n", trie.getNodeCount());
     System.out.println("Done.\n");
