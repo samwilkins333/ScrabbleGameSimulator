@@ -1,18 +1,18 @@
-package main;
+package com.swilkins.ScrabbleGameSimulator;
 
-import ScrabbleBase.Generation.Generator;
-import ScrabbleBase.Vocabulary.Trie;
-import resources.TrieFactory;
+import com.swilkins.ScrabbleBase.Generation.Generator;
+import com.swilkins.ScrabbleBase.Vocabulary.Trie;
+import com.swilkins.ScrabbleBase.Vocabulary.TrieFactory;
 
 import java.util.*;
 
-import static main.Configuration.*;
+import static com.swilkins.ScrabbleGameSimulator.Configuration.*;
 
 public class GameHarness {
 
   public static void main(String[] args) {
     System.out.println("\nLoading trie...");
-    Trie trie = new TrieFactory().loadFrom(DICTIONARY);
+    Trie trie = TrieFactory.loadFrom(GameHarness.class.getResource(String.format("/%s", DICTIONARY)));
     System.out.printf("Vocabulary contains %d words.\n", trie.getWordCount());
     System.out.printf("Trie contains %d nodes.\n", trie.getNodeCount());
     System.out.println("Done.\n");

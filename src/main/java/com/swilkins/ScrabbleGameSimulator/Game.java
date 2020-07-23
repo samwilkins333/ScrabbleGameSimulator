@@ -1,18 +1,16 @@
-package main;
+package com.swilkins.ScrabbleGameSimulator;
 
-import ScrabbleBase.Board.State.BoardStateUnit;
-import ScrabbleBase.Board.State.Multiplier;
-import ScrabbleBase.Board.State.Tile;
-import ScrabbleBase.Generation.Objects.ScoredCandidate;
+import com.swilkins.ScrabbleBase.Board.State.BoardStateUnit;
+import com.swilkins.ScrabbleBase.Board.State.Tile;
+import com.swilkins.ScrabbleBase.Generation.Objects.ScoredCandidate;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
-import static main.Configuration.BOARD_DIMENSIONS;
-import static main.Configuration.RACK_CAPACITY;
+import static com.swilkins.ScrabbleBase.Board.Configuration.*;
+import static com.swilkins.ScrabbleGameSimulator.Configuration.RACK_CAPACITY;
 
 public class Game {
 
@@ -20,12 +18,7 @@ public class Game {
     if (enableLogging) {
       System.out.println("\nPopulating tile bag...");
     }
-    List<Tile> tileBag = new ArrayList<>();
-    for (Map.Entry<Character, Configuration.TileConfiguration> entry : Configuration.tileConfigurationMap.entrySet()) {
-      for (int i = 0; i < entry.getValue().getFrequency(); i++) {
-        tileBag.add(new Tile(entry.getKey(), entry.getValue().getValue(), null));
-      }
-    }
+    List<Tile> tileBag = getStandardTileBag();
     if (enableLogging) {
       System.out.println(tileBag.stream().map(tile -> String.valueOf(tile.getLetter())).collect(Collectors.joining(" ")));
       System.out.println("Done.\n");
@@ -34,21 +27,7 @@ public class Game {
     if (enableLogging) {
       System.out.println("Initializing board multipliers...");
     }
-    BoardStateUnit[][] board = new BoardStateUnit[BOARD_DIMENSIONS][BOARD_DIMENSIONS];
-    for (int y = 0; y < BOARD_DIMENSIONS; y++) {
-      List<String> multipliers = new ArrayList<>();
-      for (int x = 0; x < BOARD_DIMENSIONS; x++) {
-        int _x = Math.min(x, BOARD_DIMENSIONS - 1 - x);
-        int _y = Math.min(y, BOARD_DIMENSIONS - 1 - y);
-        Multiplier special = Configuration.locationMapping.get(_y).get(_x);
-        Multiplier resolved = special != null ? special : new Multiplier();
-        board[y][x] = new BoardStateUnit(resolved, null);
-        multipliers.add(String.format("%s:%s", resolved.getLetterValue(), resolved.getWordValue()));
-      }
-      if (enableLogging) {
-        System.out.println(String.join(" ", multipliers));
-      }
-    }
+    BoardStateUnit[][] board = getStandardBoard();
     if (enableLogging) {
       System.out.println("Done.\n");
     }
@@ -111,9 +90,9 @@ public class Game {
   }
 
   public static void logBoard(BoardStateUnit[][] board) {
-    for (int y = 0; y < BOARD_DIMENSIONS; y++) {
+    for (int y = 0; y < STANDARD_BOARD_DIMENSIONS; y++) {
       List<String> letters = new ArrayList<>();
-      for (int x = 0; x < BOARD_DIMENSIONS; x++) {
+      for (int x = 0; x < STANDARD_BOARD_DIMENSIONS; x++) {
         Tile played = board[y][x].getTile();
         letters.add(played != null ? String.valueOf(played.getResolvedLetter()) : "_");
       }

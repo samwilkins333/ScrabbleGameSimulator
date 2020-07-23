@@ -1,7 +1,7 @@
-package main;
+package com.swilkins.ScrabbleGameSimulator;
 
-import ScrabbleBase.Board.State.BoardStateUnit;
-import ScrabbleBase.Generation.Objects.ScoredCandidate;
+import com.swilkins.ScrabbleBase.Board.State.BoardStateUnit;
+import com.swilkins.ScrabbleBase.Generation.Objects.ScoredCandidate;
 
 public class GameResult {
 

@@ -1,16 +1,16 @@
-package main;
+package com.swilkins.ScrabbleGameSimulator;
 
-import ScrabbleBase.Board.Location.TilePlacement;
-import ScrabbleBase.Board.State.BoardStateUnit;
-import ScrabbleBase.Board.State.Tile;
-import ScrabbleBase.Generation.Generator;
-import ScrabbleBase.Generation.Objects.ScoredCandidate;
+import com.swilkins.ScrabbleBase.Board.Location.TilePlacement;
+import com.swilkins.ScrabbleBase.Board.State.BoardStateUnit;
+import com.swilkins.ScrabbleBase.Board.State.Tile;
+import com.swilkins.ScrabbleBase.Generation.Generator;
+import com.swilkins.ScrabbleBase.Generation.Objects.ScoredCandidate;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static main.Configuration.RACK_CAPACITY;
+import static com.swilkins.ScrabbleGameSimulator.Configuration.RACK_CAPACITY;
 
 public class Player {
 
