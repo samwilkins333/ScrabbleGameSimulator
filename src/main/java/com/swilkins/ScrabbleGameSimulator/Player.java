@@ -27,7 +27,7 @@ public class Player {
       System.out.printf("%s => ", serialized);
     }
 
-    List<ScoredCandidate> candidates = Generator.Instance.computeAllCandidates(this.rack, board);
+    List<ScoredCandidate> candidates = Generator.computeAllCandidates(this.rack, board);
 
     if (candidates.size() == 0) {
       return null;

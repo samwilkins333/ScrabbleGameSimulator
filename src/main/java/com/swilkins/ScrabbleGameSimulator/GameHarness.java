@@ -17,8 +17,8 @@ public class GameHarness {
     System.out.printf("Trie contains %d nodes.\n", trie.getNodeCount());
     System.out.println("Done.\n");
 
-    Generator.Instance.setRoot(trie.getRoot());
-    Generator.Instance.setRackCapacity(RACK_CAPACITY);
+    Generator.setRoot(trie.getRoot());
+    Generator.setRackCapacity(RACK_CAPACITY);
 
     System.out.println("Beginning game simulation...\n");
 
