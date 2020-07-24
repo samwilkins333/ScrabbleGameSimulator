@@ -4,7 +4,6 @@ import com.swilkins.ScrabbleBase.Board.State.BoardStateUnit;
 import com.swilkins.ScrabbleBase.Board.State.Tile;
 import com.swilkins.ScrabbleBase.Generation.Objects.ScoredCandidate;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -87,17 +86,6 @@ public class Game {
     }
 
     return new GameResult(board, bestWord, playerOne.getScore(), playerTwo.getScore(), i);
-  }
-
-  public static void logBoard(BoardStateUnit[][] board) {
-    for (int y = 0; y < STANDARD_BOARD_DIMENSIONS; y++) {
-      List<String> letters = new ArrayList<>();
-      for (int x = 0; x < STANDARD_BOARD_DIMENSIONS; x++) {
-        Tile played = board[y][x].getTile();
-        letters.add(played != null ? String.valueOf(played.getResolvedLetter()) : "_");
-      }
-      System.out.println(String.join(" ", letters));
-    }
   }
 
 }

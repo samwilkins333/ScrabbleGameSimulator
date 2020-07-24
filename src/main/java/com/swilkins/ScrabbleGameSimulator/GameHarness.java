@@ -6,6 +6,7 @@ import com.swilkins.ScrabbleBase.Vocabulary.TrieFactory;
 
 import java.util.*;
 
+import static com.swilkins.ScrabbleBase.Board.Configuration.logBoard;
 import static com.swilkins.ScrabbleGameSimulator.Configuration.*;
 
 public class GameHarness {
@@ -38,7 +39,7 @@ public class GameHarness {
     Optional<GameResult> maxWord = results.stream().max(Comparator.comparingInt(result -> result.getBestWord().getScore()));
     maxWord.ifPresent(gameResult -> {
       System.out.printf("\n1) Highest-scoring single play was %s.\n\n", gameResult.getBestWord());
-      Game.logBoard(gameResult.getBoard());
+      logBoard(gameResult.getBoard());
     });
 
     Optional<GameResult> maxOne = results.stream().max(Comparator.comparingInt(GameResult::getOneScore));
@@ -47,13 +48,13 @@ public class GameHarness {
       int maxScore = Math.max(maxOne.get().getOneScore(), maxTwo.get().getTwoScore());
       GameResult maxGame = maxScore == maxOne.get().getOneScore() ? maxOne.get() : maxTwo.get();
       System.out.printf("\n2) Highest-scoring player total was %d points.\n\n", maxScore);
-      Game.logBoard(maxGame.getBoard());
+      logBoard(maxGame.getBoard());
     }
 
     Optional<GameResult> maxLength = results.stream().max(Comparator.comparingInt(GameResult::getMoveCount));
     maxLength.ifPresent(gameResult -> {
       System.out.printf("\n3) Longest game required %d turns.\n\n", gameResult.getMoveCount());
-      Game.logBoard(gameResult.getBoard());
+      logBoard(gameResult.getBoard());
     });
   }
 
