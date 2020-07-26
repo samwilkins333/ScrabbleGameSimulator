@@ -41,7 +41,7 @@ public class Player {
       System.out.println();
     }
 
-    for (TilePlacement placement : maximal.getPlacements()) {
+    for (TilePlacement placement : maximal.getPrimary()) {
       Tile toPlay = placement.getTile();
       for (Tile tile : this.rack) {
         if (tile.getLetter() == toPlay.getLetter()) {
