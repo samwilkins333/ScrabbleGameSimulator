@@ -1,15 +1,16 @@
 package com.swilkins.ScrabbleGameSimulator;
 
 import com.swilkins.ScrabbleBase.Board.Location.TilePlacement;
-import com.swilkins.ScrabbleBase.Board.State.BoardStateUnit;
+import com.swilkins.ScrabbleBase.Board.State.BoardSquare;
 import com.swilkins.ScrabbleBase.Board.State.Tile;
 import com.swilkins.ScrabbleBase.Generation.Generator;
-import com.swilkins.ScrabbleBase.Generation.Objects.ScoredCandidate;
+import com.swilkins.ScrabbleBase.Generation.Candidate;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.swilkins.ScrabbleBase.Generation.Generator.getDefaultOrdering;
 import static com.swilkins.ScrabbleGameSimulator.Configuration.RACK_CAPACITY;
 
 public class Player {
@@ -21,19 +22,19 @@ public class Player {
     this.rack = rack;
   }
 
-  public ScoredCandidate play(BoardStateUnit[][] board, List<Tile> tileBag, boolean enableLogging) {
+  public Candidate play(BoardSquare[][] board, List<Tile> tileBag, boolean enableLogging) {
     if (enableLogging) {
       String serialized = this.rack.stream().map(tile -> String.valueOf(tile.getLetter())).collect(Collectors.joining(" "));
       System.out.printf("%s => ", serialized);
     }
 
-    List<ScoredCandidate> candidates = Generator.computeAllCandidates(this.rack, board);
+    List<Candidate> candidates = Generator.compute(this.rack, board, getDefaultOrdering());
 
     if (candidates.size() == 0) {
       return null;
     }
 
-    ScoredCandidate maximal = candidates.get(0);
+    Candidate maximal = candidates.get(0);
     score += maximal.getScore();
 
     if (enableLogging) {

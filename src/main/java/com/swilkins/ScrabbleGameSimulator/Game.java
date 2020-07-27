@@ -1,8 +1,8 @@
 package com.swilkins.ScrabbleGameSimulator;
 
-import com.swilkins.ScrabbleBase.Board.State.BoardStateUnit;
+import com.swilkins.ScrabbleBase.Board.State.BoardSquare;
 import com.swilkins.ScrabbleBase.Board.State.Tile;
-import com.swilkins.ScrabbleBase.Generation.Objects.ScoredCandidate;
+import com.swilkins.ScrabbleBase.Generation.Candidate;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -26,7 +26,7 @@ public class Game {
     if (enableLogging) {
       System.out.println("Initializing board multipliers...");
     }
-    BoardStateUnit[][] board = getStandardBoard();
+    BoardSquare[][] board = getStandardBoard();
     if (enableLogging) {
       System.out.println("Done.\n");
     }
@@ -56,7 +56,7 @@ public class Game {
       System.out.println("Beginning game...");
     }
 
-    ScoredCandidate bestWord = null;
+    Candidate bestWord = null;
     int i = 0;
     while (impasseCount < 2 && current.hasTiles()) {
       i++;
@@ -64,7 +64,7 @@ public class Game {
       if (enableLogging) {
         System.out.printf("\n*** Move %d ***\n\n", i);
       }
-      ScoredCandidate played = current.play(board, tileBag, enableLogging);
+      Candidate played = current.play(board, tileBag, enableLogging);
       if (played == null) {
         impasseCount++;
       } else {

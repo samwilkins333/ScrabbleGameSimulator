@@ -1,17 +1,17 @@
 package com.swilkins.ScrabbleGameSimulator;
 
-import com.swilkins.ScrabbleBase.Board.State.BoardStateUnit;
-import com.swilkins.ScrabbleBase.Generation.Objects.ScoredCandidate;
+import com.swilkins.ScrabbleBase.Board.State.BoardSquare;
+import com.swilkins.ScrabbleBase.Generation.Candidate;
 
 public class GameResult {
 
-  private final BoardStateUnit[][] board;
-  private final ScoredCandidate bestWord;
+  private final BoardSquare[][] board;
+  private final Candidate bestWord;
   private final int oneScore;
   private final int twoScore;
   private final int moveCount;
 
-  public GameResult(BoardStateUnit[][] board, ScoredCandidate bestWord, int oneScore, int twoScore, int moveCount) {
+  public GameResult(BoardSquare[][] board, Candidate bestWord, int oneScore, int twoScore, int moveCount) {
     this.board = board;
     this.bestWord = bestWord;
     this.oneScore = oneScore;
@@ -19,11 +19,11 @@ public class GameResult {
     this.moveCount = moveCount;
   }
 
-  public BoardStateUnit[][] getBoard() {
+  public BoardSquare[][] getBoard() {
     return board;
   }
 
-  public ScoredCandidate getBestWord() {
+  public Candidate getBestWord() {
     return bestWord;
   }
 
