@@ -22,13 +22,13 @@ public class Player {
     this.rack = rack;
   }
 
-  public Candidate play(BoardSquare[][] board, List<Tile> tileBag, boolean enableLogging) {
+  public Candidate play(Generator generator, BoardSquare[][] board, List<Tile> tileBag, boolean enableLogging) {
     if (enableLogging) {
       String serialized = this.rack.stream().map(tile -> String.valueOf(tile.getLetter())).collect(Collectors.joining(" "));
       System.out.printf("%s => ", serialized);
     }
 
-    List<Candidate> candidates = Generator.compute(this.rack, board, getDefaultOrdering());
+    List<Candidate> candidates = generator.compute(this.rack, board, getDefaultOrdering());
 
     if (candidates.size() == 0) {
       return null;

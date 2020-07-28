@@ -3,6 +3,7 @@ package com.swilkins.ScrabbleGameSimulator;
 import com.swilkins.ScrabbleBase.Board.State.BoardSquare;
 import com.swilkins.ScrabbleBase.Board.State.Tile;
 import com.swilkins.ScrabbleBase.Generation.Candidate;
+import com.swilkins.ScrabbleBase.Generation.Generator;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -13,7 +14,7 @@ import static com.swilkins.ScrabbleGameSimulator.Configuration.RACK_CAPACITY;
 
 public class Game {
 
-  public GameResult play(boolean enableLogging) {
+  public GameResult play(Generator generator, boolean enableLogging) {
     if (enableLogging) {
       System.out.println("\nPopulating tile bag...");
     }
@@ -64,7 +65,7 @@ public class Game {
       if (enableLogging) {
         System.out.printf("\n*** Move %d ***\n\n", i);
       }
-      Candidate played = current.play(board, tileBag, enableLogging);
+      Candidate played = current.play(generator, board, tileBag, enableLogging);
       if (played == null) {
         impasseCount++;
       } else {

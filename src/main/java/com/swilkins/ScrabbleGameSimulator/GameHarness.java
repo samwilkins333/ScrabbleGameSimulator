@@ -18,8 +18,7 @@ public class GameHarness {
     System.out.printf("Trie contains %d nodes.\n", trie.getNodeCount());
     System.out.println("Done.\n");
 
-    Generator.setRoot(trie.getRoot());
-    Generator.setRackCapacity(RACK_CAPACITY);
+    Generator generator = new Generator(trie, RACK_CAPACITY);
 
     System.out.println("Beginning game simulation...\n");
 
@@ -27,7 +26,7 @@ public class GameHarness {
     List<GameResult> results = new ArrayList<>();
     for (int i = 0; i < GAME_ITERATIONS; i++) {
       System.out.printf("Game %d\n", i + 1);
-      results.add(new Game().play(ENABLE_LOGGING));
+      results.add(new Game().play(generator, ENABLE_LOGGING));
     }
 
     long duration = System.currentTimeMillis() - start;
