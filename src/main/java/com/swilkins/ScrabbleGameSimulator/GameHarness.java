@@ -4,17 +4,22 @@ import com.swilkins.ScrabbleBase.Generation.Generator;
 import com.swilkins.ScrabbleBase.Vocabulary.PermutationTrie;
 
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
 
 import static com.swilkins.ScrabbleBase.Board.Configuration.logBoard;
+import static com.swilkins.ScrabbleBase.Vocabulary.Trie.LOWERCASE;
 import static com.swilkins.ScrabbleGameSimulator.Configuration.*;
 
 public class GameHarness {
 
   public static void main(String[] args) {
     System.out.println("\nLoading trie...");
-    URL dictionaryUrl = GameHarness.class.getResource(String.format("/%s", DICTIONARY));
-    PermutationTrie trie = PermutationTrie.loadFrom(dictionaryUrl);
+    URL dictionary = GameHarness.class.getResource(String.format("/%s", DICTIONARY));
+    PermutationTrie trie = new PermutationTrie(LOWERCASE);
+    trie.loadFrom(dictionary, String::trim);
     System.out.printf("Vocabulary contains %d words.\n", trie.size());
     System.out.printf("Trie contains %d nodes.\n", trie.getNodeSize());
     System.out.println("Done.\n");
