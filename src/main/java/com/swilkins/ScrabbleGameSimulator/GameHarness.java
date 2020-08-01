@@ -18,7 +18,7 @@ public class GameHarness {
   public static void main(String[] args) {
     System.out.println("\nLoading trie...");
     URL dictionary = GameHarness.class.getResource(String.format("/%s", DICTIONARY));
-    PermutationTrie trie = new PermutationTrie(LOWERCASE);
+    PermutationTrie trie = new PermutationTrie();
     trie.loadFrom(dictionary, String::trim);
     System.out.printf("Vocabulary contains %d words.\n", trie.size());
     System.out.printf("Trie contains %d nodes.\n", trie.getNodeSize());
