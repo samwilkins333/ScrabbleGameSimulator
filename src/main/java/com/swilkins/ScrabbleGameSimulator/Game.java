@@ -75,7 +75,7 @@ public class Game {
         }
       }
       if (enableLogging) {
-        logBoard(board);
+        System.out.println(String.join("\n", serializeBoard(board)));
         System.out.printf("\nTile bag count: %d\n\n", tileBag.size());
         System.out.printf("Player 1: %d\n", playerOne.getScore());
         System.out.printf("Player 2: %d\n", playerTwo.getScore());

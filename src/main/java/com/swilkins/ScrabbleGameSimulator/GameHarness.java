@@ -9,8 +9,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
-import static com.swilkins.ScrabbleBase.Board.Configuration.logBoard;
-import static com.swilkins.ScrabbleBase.Vocabulary.Trie.LOWERCASE;
+import static com.swilkins.ScrabbleBase.Board.Configuration.serializeBoard;
 import static com.swilkins.ScrabbleGameSimulator.Configuration.*;
 
 public class GameHarness {
@@ -44,7 +43,7 @@ public class GameHarness {
     Optional<GameResult> maxWord = results.stream().max(Comparator.comparingInt(result -> result.getBestWord().getScore()));
     maxWord.ifPresent(gameResult -> {
       System.out.printf("\n1) Highest-scoring single play was %s.\n\n", gameResult.getBestWord());
-      logBoard(gameResult.getBoard());
+      System.out.println(String.join("\n", serializeBoard(gameResult.getBoard())));
     });
 
     Optional<GameResult> maxOne = results.stream().max(Comparator.comparingInt(GameResult::getOneScore));
@@ -53,13 +52,13 @@ public class GameHarness {
       int maxScore = Math.max(maxOne.get().getOneScore(), maxTwo.get().getTwoScore());
       GameResult maxGame = maxScore == maxOne.get().getOneScore() ? maxOne.get() : maxTwo.get();
       System.out.printf("\n2) Highest-scoring player total was %d points.\n\n", maxScore);
-      logBoard(maxGame.getBoard());
+      System.out.println(String.join("\n", serializeBoard(maxGame.getBoard())));
     }
 
     Optional<GameResult> maxLength = results.stream().max(Comparator.comparingInt(GameResult::getMoveCount));
     maxLength.ifPresent(gameResult -> {
       System.out.printf("\n3) Longest game required %d turns.\n\n", gameResult.getMoveCount());
-      logBoard(gameResult.getBoard());
+      System.out.println(String.join("\n", serializeBoard(gameResult.getBoard())));
     });
   }
 
