@@ -5,6 +5,7 @@ import com.swilkins.ScrabbleBase.Board.State.BoardSquare;
 import com.swilkins.ScrabbleBase.Board.State.Tile;
 import com.swilkins.ScrabbleBase.Generation.Generator;
 import com.swilkins.ScrabbleBase.Generation.Candidate;
+import com.swilkins.ScrabbleBase.Generation.GeneratorResult;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -28,13 +29,13 @@ public class Player {
       System.out.printf("%s => ", serialized);
     }
 
-    List<Candidate> candidates = generator.compute(this.rack, board, getDefaultOrdering());
+    GeneratorResult result = generator.compute(this.rack, board).orderBy(getDefaultOrdering());
 
-    if (candidates.size() == 0) {
+    if (result.isEmpty()) {
       return null;
     }
 
-    Candidate maximal = candidates.get(0);
+    Candidate maximal = result.get(0);
     score += maximal.getScore();
 
     if (enableLogging) {
