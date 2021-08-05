@@ -26,7 +26,7 @@ public class NYTSpellingBeeSolver {
       letters.add(lower);
     }
 
-    int minimum = 0;
+    int minimum = 4;
     if (argv.length > 1) {
       minimum = Math.max(Integer.parseInt(argv[1]), 0);
     }
