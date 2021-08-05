@@ -3,8 +3,8 @@ package com.swilkins.ScrabbleGameSimulator;
 import com.swilkins.ScrabbleBase.Board.Location.TilePlacement;
 import com.swilkins.ScrabbleBase.Board.State.BoardSquare;
 import com.swilkins.ScrabbleBase.Board.State.Tile;
-import com.swilkins.ScrabbleBase.Generation.Generator;
 import com.swilkins.ScrabbleBase.Generation.Candidate;
+import com.swilkins.ScrabbleBase.Generation.Generator;
 import com.swilkins.ScrabbleBase.Generation.GeneratorResult;
 
 import java.util.LinkedList;
@@ -16,7 +16,7 @@ import static com.swilkins.ScrabbleGameSimulator.Configuration.RACK_CAPACITY;
 
 public class Player {
 
-  private LinkedList<Tile> rack;
+  private final LinkedList<Tile> rack;
   private int score = 0;
 
   public Player(LinkedList<Tile> rack) {
